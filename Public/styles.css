@@ -1,0 +1,632 @@
+/* Baseplate css */
+*:not(title, script){
+    display: inline-block;
+}
+
+head {
+    display: none;
+}
+
+html {
+    font-size: 16px;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@700&display=swap');
+
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar  {
+    display: none;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: linear-gradient(180deg, #00A3FF 0%, #00A3FF 15.1%, #FFFFFF 100%);
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    scrollbar-color: hsl(0, 0%, 56.5%) transparent;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+ul,li, p{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+abbr {
+    font-variant: none;
+    border-bottom: none;
+    cursor: inherit;
+    text-decoration: none;
+}
+
+/* Subject List */
+#SubjectsContainer, #ForumContainer {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: #625D5D;
+    opacity: 0.95;
+    position: fixed;
+    z-index: +1;
+    top: 0;
+}
+
+.backButton {
+    font-weight: bold;
+    color: #fefefe;
+    font-size: 4rem;
+    margin: 0.95rem 2.75rem;
+}
+
+.backButton:hover {
+    cursor: pointer;
+}
+
+#listOfSubjects, #forum {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#forum {
+    min-height: 480px;
+    height: 85%;
+    overflow: scroll;
+}
+
+#listOfSubjects li {
+    line-height: 6rem;
+}
+
+#listOfSubjects li a{
+    font-weight: bold;
+    font-size: 2rem;
+    display: inline-block;
+    height: fit-content;
+}
+
+#listOfSubjects li a:hover {
+    cursor: pointer;
+}
+
+#physicsText {
+    color: #C99CDE;
+}
+
+#physicsText:hover {
+    opacity: 0.75;
+}
+
+#mathText {
+    color: #A0E2B3;
+}
+
+#mathText:hover {
+    opacity: 0.75;
+}
+
+#compsciText {
+    color: #FFF27E;
+}
+
+#compsciText:hover {
+    opacity: 0.75;
+}
+
+#home_Body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* NavBar CSS */
+
+#Navigation {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: +1;
+    margin-top: 0;
+    height: 8rem;
+}
+
+#SubMenu {
+    width: 32px;
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+    height: fit-content;
+}
+
+#SubMenu:hover {
+    cursor: pointer;
+}
+
+.MenuLines {
+    width: 28px;
+    height: 4px;
+    background: #FFFFFF;
+    border: 2px solid black;
+    margin: 1px;
+    align-items: center;
+}
+
+#SubjectTitle {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    max-width: 142px;
+    word-wrap: break-word;
+}
+
+#Flashcard:hover {
+    cursor: pointer;
+}
+
+/* .CardBox {
+    width: 15px;
+    height: 34.5px;
+    background: #FFFFFF;
+    border: 3px solid black;
+    position: relative;
+}
+*/
+/* #card2 {
+    transform: rotate(40deg);
+    top: 5px;
+    left: 40px;
+}
+
+#card1 {
+    transform: rotate(80deg);
+    top: 15px;
+    left: 75px;
+} */
+
+#Flashcard {
+    display: flex;
+    position: relative;
+    width: 48px;
+    height: 70px;
+}
+
+.CardBox {
+    width: 15px;
+    height: 35px;
+    background: #FFFFFF;
+    border: 3px solid black;
+    position: absolute;
+}
+
+#card1 {    /* bottom */
+    transform: rotate(80deg);
+    left: 14px;
+    top: 26px;
+
+}
+
+#card2 {    /* middle */
+    transform: rotate(40deg);
+    left: 10px;
+    top: 16px;
+}
+
+#card3 {
+    align-self: center;
+}
+
+/* Questions and Answers CSS */
+
+#OuterWrapper, #OuterWrapperFlashCards {
+    display: flex;
+    /* position: fixed; */
+    width: 100%;
+    /* height: 100%; */
+    justify-content: center;
+    top: 0;
+}
+
+#OuterWrapper {
+    height: 100%;
+}
+
+#OuterWrapperFlashCards {
+    /* position: fixed; */
+    height: 100%;
+    align-items: center;
+}
+
+#Wrapper, .WrapperFlashCards{
+    background: white;
+    width: 754px;
+    border-radius: 25px;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#Wrapper {
+    height: calc((32/45)*100vh);
+}
+
+#QuesBox, .AnswerContainer, .AnswerContainerFlashCards, .QuesBoxFlashCards, #BlurHIDE {
+    width: calc((239/256)*100%);
+}
+
+#QuesBox,.QuesBoxFlashCards {
+    display: flex;
+    height: calc((435/728)*100%);
+    justify-content: center;
+    align-items: center;
+    background: #80C0FF;
+    margin: 15px 0px;
+}
+
+#QuesBox {
+    flex-direction: column;
+    overflow: scroll;
+}
+
+#question {
+    color: white;
+    font-size: 1.25rem;
+    padding: 10px;
+    text-align: center;
+    margin: 0.5rem;
+}
+
+#imageContainerDisplay {
+    width: calc((16/37)*100%);
+    height: calc((9/11)*100%);
+    background-color: black;
+}
+
+#imgDisplay {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.AnswerContainer, .AnswerContainerFlashCards, #BlurHIDE {
+    display: flex;
+    flex-direction: column;
+    height: calc((293/728)*100%);
+    margin-bottom: 25px;
+    overflow: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.AnswerContainer {
+    display: none;
+}
+
+#BlurHIDE {
+    justify-content: space-around;
+    align-items: center;
+}
+
+#ShowAns, #Skip {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 8.3rem;
+    min-height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    line-height: 2.5rem;
+}
+
+#ShowAns {
+    background-color: #9FE9B4;
+}
+
+#ShowAns:hover {
+    background-color: #fefefe;
+    color: #9FE9B4;
+    cursor: pointer;
+}
+
+#Skip {
+    background-color: #FFC2AB;
+}
+
+#Skip:hover {
+    background-color: #fefefe;
+    color: #FFC2AB;
+    cursor: pointer;
+}
+
+.AnswerContainer::-webkit-scrollbar, .AnswerContainerFlashCards::-webkit-scrollbar{
+    display: none;
+}
+
+.answers {
+    background: #80C0FF;
+    padding: 3px 10px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.answer {
+    width: 100%;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.choiceWrapper {
+    display: flex;
+    width: 4.5rem;
+    justify-content: space-between;
+
+}
+
+.checkTick:hover, .checkCross:hover {
+    cursor: pointer;
+}
+
+/* View FlashCards CSS */
+
+#OuterWrapperFlashCards {
+    height: auto;
+    position: static;
+    flex-direction: column;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.AnswerContainerFlashCards {
+    display: none;
+    max-height: 116px;
+}
+
+.ShowAnswer, .HideAnswers, .EditFlashCardButton {
+    align-self: flex-start;
+    padding: 0px 25px 5px 25px;
+    font-weight: bold
+}
+
+.EditFlashCardButton {
+    padding: 5px 25px 0px 25px;
+}
+
+.ShowAnswer:hover, .HideAnswers:hover, .EditFlashCardButton:hover {
+    cursor: pointer;
+    color: #80C0FF;
+}
+
+.HideAnswers {
+    display: none;
+}
+
+.WrapperFlashCards {
+    margin-bottom: 2rem;
+}
+
+#AddFlashCardButton:hover {
+    cursor: pointer;
+}
+
+/* Add Flash Card CSS */
+/* width: calc(1.25*100vh) 
+width: calc((239/256)*100%)
+calc( (239/256)*(1.25*100vh) )
+*/
+
+#ForumContainer {
+    opacity: 0.98;
+}
+
+#AnswerType {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: white;
+}
+
+#AnswerType:hover {
+    cursor: pointer;
+}
+
+.QuestionAndAnswer {
+    width: 722px;
+    text-align: left;
+    border: 5px solid #FF4500;
+    color: white;
+    margin: 0 auto;
+}
+.QuestionAndAnswer input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    width: 100%;
+}
+
+#QuestionImageTextContainer, #AnswerImageTextContainer {
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    width: 756px;
+}
+
+#QuestionImageText:hover, #AnswerImageText:hover {
+    cursor: pointer;
+}
+
+#AnswerField {
+    margin-top: 1rem; 
+    height: 10rem;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#AnswerField::-webkit-scrollbar {
+    display: none;
+}
+
+.answerFieldWrapper {
+    display: flex;
+    flex-direction: row;
+}
+.answerFieldWrapper button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    width: 1.75rem;
+}
+
+.answerFieldWrapper button:hover {
+    cursor: pointer;
+}
+
+/* #imageContainer {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+} */
+
+/* #ansImageWrapper {
+    width: 240px;
+    height: 135px;
+} */
+
+/* #imageContainer:hover {
+    cursor: pointer;
+} */
+
+/* #ansImageDisplay {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+} */
+
+#postButtonContainer, #modifyButtonContainer {
+    text-align: center;
+    border: none;
+    margin-top: 2rem;
+}
+
+#postButtonContainer button, #modifyButtonContainer button {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0px;
+    background-color: #FF4500;
+    color: white;
+    border: white solid 1.5px;
+    font-weight: bold;
+}
+
+#postButtonContainer button:hover, #modifyButtonContainer button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #FF4500;
+    border: #FF4500 solid 1.5px;
+}
+
+@media (max-width: 756px) {
+    .WrapperFlashCards, #QuestionImageTextContainer, #AnswerImageTextContainer{
+        width: calc(0.9*100vw);
+    }
+    .QuestionAndAnswer {
+        width: calc((754/788)*(0.9*100vw));
+    }
+}
+
+@media (max-width: 372px) {
+    .QuestionAndAnswer {
+        width: calc((754/788)*(0.9*100vw));
+    }
+}
+
+#cardDecksTitle {
+    font-weight: bold;
+    font-size: 1.2rem;
+    align-self: flex-start;
+    margin: 0.5rem 0rem 0rem 2rem;
+}
+
+.topicCheck {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+.TopicText {
+    width: 100%;
+    text-align: center;
+}
+
+#proceedButton {
+    background-color: #D7D7D7;
+    cursor: no-drop;
+}
+
+#AllTopicsButton {
+    cursor: pointer;
+}
+
+#topicSelectionBox {
+    width: 100%;
+    background: #625D5D;
+    outline: none;
+    border: none;
+    color: #fefefe;
+    font-size: 1.1rem;
+    border-radius: 0;
+}
+
+#FullQuestionImageTextContainer, #FullAnswerImageTextContainer {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+#QuestionImageEditContainer, #AnswerImageEditContainer {
+    margin-top: 0.2rem;
+    display: none;
+    width: 756px;
+    justify-content: space-between;
+}
+
+.qImageButtons, .aImageButtons {
+    color: #fefefe;
+    border: #fefefe 1px solid;
+    padding: 4px;
+}
+
+.qImageButtons:hover, .aImageButtons:hover {
+    cursor: pointer;
+}
