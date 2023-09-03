@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= Subject %> Flashcards</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/flashcard.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <%- include("./Partials/Navigation.ejs")%>
+
+    <div id="OuterWrapperFlashCards">
+        <div class="WrapperFlashCards" style="border-radius: 0;" id="AddFlashCardButton" onclick="ToAddCardDetails()">
+            <div class="QuesBoxFlashCards" style="margin: 10px 0px;;">
+                <span id="question">Add FlashCards</span>
+            </div>
+        </div>
+        <% if (JSON.parse(Flashcards).length > 0) { %>
+            <% JSON.parse(Flashcards).forEach( (item) => { %>
+                <div class="WrapperFlashCards">
+                    <span style="display: none;" data-topic="<%= item[0] %>"></span>
+                    <div class="EditCardWrapper">
+                        <span class="EditFlashCardButton" onclick="modifyCard(event)">
+                            <i class="fa fa-pencil"></i> Edit Flash Card</span>
+                        <span class="EditFlashCardButton" onclick="deleteCard(event)">
+                            <i class="fa fa-trash-o"></i> Delete Flash Card
+                        </span>
+                    </div>
+                    <div class="QuesBoxFlashCards">
+                        <span id="question"><%= item[1] %></span>
+                    </div>
+                    <div class="AnswerContainerFlashCards">
+                        <% for (let i=3; i<item.length; i++) { %>
+                            <% if (item[i] != "") { %>
+                                <% console.log(item[i]) %>
+                            <div class="answers">
+                                <span class="answer"><%= item[i] %></span>
+                            </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <span class="HideAnswers">
+                        &#9654; Hide Answers
+                    </span>
+                    <span class="ShowAnswer">&#9654; Show Answers</span>
+                </div>
+            <% } ) %>
+        <% } %>
+    </div>
+    <%- include("./Partials/FlashCardAddPage.ejs")%>
+    <%- include("./Partials/listOfSubjects.ejs")%>
+    <%- include("./Scripts/FlashCardScript.ejs")%>
+    <%- include("./Scripts/AddFlashCardScript.ejs")%>
+    <%- include("./Scripts/PostNewCardScript.ejs")%>
+    <%- include("./Scripts/ModifyCardsScript.ejs")%>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= Subject %> Topic List</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/flashcard.png">
+</head>
+<body style="overflow-y: hidden" id="home_Body">
+    <%- include("./Partials/Navigation.ejs")%>
+    <div id="OuterWrapper">
+        <div id="Wrapper">
+            <div id="cardDecksTitle">CARD DECKS</div>
+            <div class="AnswerContainer" style="height: auto;margin: 10px 0;">
+                <div id="AllTopicsButton" class="answers" style="min-height: 2rem;font-weight: bold;justify-content: center;">All Topics</div>
+            </div>
+            <div class="AnswerContainer" id="TopicContainer" style="height: 50%;margin: 0px 0px 10px 0;">
+                <% for (i of topics) { %>
+                <div class="answers topics" data-checked="false" data-topic="<%= i[0] %>" style="min-height: 2rem;font-weight: bold;justify-content: center;">
+                    <span class="TopicText"><%= i[1] %></span>
+                    <input type="checkbox" class="topicCheck">
+                </div>
+                <% } %>
+            </div>
+            <div class="AnswerContainer" style="height: auto;">
+                <div  id="proceedButton" class="answers" style="min-height: 2rem;font-weight: bold;justify-content: center;">REVISE CARDS</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("Flashcard").style.visibility = "hidden"
+        for (i of document.getElementsByClassName("AnswerContainer")) {
+            i.style.display = "flex"
+        }
+        document.getElementById("AllTopicsButton").onclick = () => {
+            window.location.pathname= window.location.pathname.slice(0, -6)
+        }
+    </script>
+    <!-- tickmark - &#10003; -->
+    <!-- cross - &#10007; -->
+    <%- include("./Partials/listOfSubjects.ejs")%>
+    <%- include("./Scripts/topicScript.ejs")%>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= Subject %> FlashCards</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/flashcard.png">
+</head>
+<body style="overflow-y: hidden" id="home_Body">
+    <div id="dataCards" data-cards="<%=Flashcards%>" style="display: none;"></div>
+    <%- include("./Partials/Navigation.ejs")%>
+    <div id="OuterWrapper">
+        <div id="Wrapper">
+            <div id="QuesBox">
+                <span id="question"></span>
+                <span id="imageContainerDisplay" style="display: none;">
+                    <img id="imgDisplay" src="">
+                </span>
+            </div>
+            <div id="AnswerContainer" class="AnswerContainer">
+                <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+                <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+                <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+                <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+            </div>
+            <div id="BlurHIDE">
+                <span id="ShowAns">SHOW ANSWER</span>
+                <span id="Skip">SKIP CARD</span>
+            </div>  
+        </div>
+    </div>
+    <!-- tickmark - &#10003; -->
+    <!-- cross - &#10007; -->
+    <%- include("./Partials/listOfSubjects.ejs")%>
+    <%- include("./Scripts/HomeScript.ejs") %>
+    <%- include("./KeyMapScripts/homeKeys.ejs") %>
+</body>
+</html>
