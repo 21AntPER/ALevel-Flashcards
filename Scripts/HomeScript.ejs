@@ -1,0 +1,129 @@
+<script>
+    const cards = JSON.parse(document.getElementById("dataCards").dataset.cards)
+    const quesBox = document.getElementById("question");
+    const quesImg = document.getElementById("imgDisplay")
+    const ansWrapper = document.getElementById("AnswerContainer")
+    const controlWrapper = document.getElementById("BlurHIDE")
+    var randomNum, flashCard, question, answer;
+    var scrollIndex = 0;
+
+    function cardsRedirect() {
+        location.pathname += "/cards"
+    }
+
+    function GenerateFlashCard() {
+        randomNum = Math.floor(Math.random() * cards.length);
+        if (cards.length === 0) {
+            return
+        }
+        flashCard = cards[randomNum];
+        cards.splice(randomNum, 1)
+        question = flashCard[1];
+        answer = flashCard.slice(3)
+        console.log(answer)
+        quesBox.innerText = question
+        // if (flashCard[2] != "") {
+        //     quesImg.parentElement.style.display = "inline-block"
+        //     quesImg.src = flashCard[1]
+        // }
+        ansWrapper.innerHTML = ""
+        for (i of answer) {
+            if (i != "") {
+                ansWrapper.innerHTML += `
+                <div class="answers" data-checked="false">
+                    <span class="answer">${i}</span>
+                    <div class="choiceWrapper">
+                        <button class="checkTick Answer1" onclick="check(event)">&#10003;</button>
+                        <button class="checkCross Answer1" onclick="cross(event)">&#10007;</button>
+                    </div>
+                </div>
+                `
+            }
+        }
+        ansWrapper.innerHTML +=`
+        <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+        <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+        <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+        <div class="answers" data-checked="true" style="min-height: 2rem; visibility:hidden;"></div>
+        `
+    }
+    
+    function AllBoxesChecked() {
+        AllChecked = true
+        for (i of ansWrapper.children) {
+            // console.log(i.dataset.checked)
+            if (i.dataset.checked === "false") {
+                AllChecked = false
+            }
+        }
+        if (AllChecked) {
+            setTimeout(() => {
+                scrollIndex = 0;
+                ansWrapper.scroll({
+                    top: 0
+                })
+                ansWrapper.style.display = "none";
+                controlWrapper.style.display = "flex";
+                GenerateFlashCard();
+            }, 200)
+            return true
+        } else {
+            return false
+        }
+    }
+
+    function scroll(target) {
+        var index, length=0;
+        for (let i=0; i<ansWrapper.children.length-4; i++) {
+            length += parseInt(getComputedStyle(ansWrapper.children[i]).height)
+            // console.log(length)
+            if (ansWrapper.children[i] == target) {
+                index = i+1
+                break
+            }
+            if ((ansWrapper.children[i].dataset.checked === "true")) {
+                scrollIndex = i
+            }
+        }
+        // console.log(scrollIndex)
+        if (index-1 < scrollIndex) {
+            return
+        }
+        length += (index * 26)
+        // console.log(length)
+        // console.log("scroll")
+        ansWrapper.scroll({
+            top: length,
+            behavior: "smooth"
+        })
+        // console.log("scrolled")
+    }
+
+    function check(e) {
+        const target = e.target.parentElement.parentElement
+        target.style.backgroundColor = "#9FE9B4"
+        target.dataset.checked = "true"
+        if (!AllBoxesChecked()) {
+            scroll(target)
+        }
+    }
+    
+    function cross(e) {
+        const target = e.target.parentElement.parentElement
+        target.style.backgroundColor = "#FFC2AB"
+        target.dataset.checked = "true"
+        if (!AllBoxesChecked()) {
+            scroll(target)
+        }
+    }
+
+    GenerateFlashCard();
+
+    document.getElementById("ShowAns").onclick = () => {
+        controlWrapper.style.display = "none";
+        ansWrapper.style.display = "flex";
+    }
+    document.getElementById("Skip").onclick = () => {
+        GenerateFlashCard()
+    }
+</script>

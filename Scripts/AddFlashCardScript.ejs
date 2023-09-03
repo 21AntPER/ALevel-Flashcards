@@ -1,0 +1,126 @@
+<script>
+    const AddInputField = document.getElementById("AddInputField");
+    const quesImageBoxContainer = document.getElementById("QuestionImageTextContainer");
+    const quesImageBox = document.getElementById("QuestionImageText");
+    const quesImage = document.getElementById("quesImageFileInput");
+    const ansImageBoxContainer = document.getElementById("AnswerImageTextContainer");
+    const ansImageBox = document.getElementById("AnswerImageText");
+    const ansImage = document.getElementById("ansImageFileInput");
+    const QuestionImageEditContainer = document.getElementById("QuestionImageEditContainer")
+    const AnswerImageEditContainer= document.getElementById("AnswerImageEditContainer")
+    var ansImageDataUrl = '', quesImageDataUrl = '';
+    var ansImageUrl = "", quesImageUrl = "";
+    const reader =  new FileReader();
+
+    function ViewQuestionImage() {
+        window.open(quesImageUrl)
+    }
+
+    function ViewAnswerImage() {
+        window.open(ansImageUrl)
+    }
+
+    function UpdateQuestionImage() {
+        quesImage.click()
+    }
+
+    function UpdateAnswerImage() {
+        ansImage.click()
+    }
+
+    function ClearQuestionImage() {
+        quesImage.value = ""
+        QuestionImageEditContainer.style.display = "none"
+        quesImageBoxContainer.style.display = "flex"
+        quesImageDataUrl = ""
+        quesImageUrl = ""
+        
+    }
+
+    function ClearAnswerImage() {
+        ansImage.value = ""
+        AnswerImageEditContainer.style.display = "none"
+        ansImageBoxContainer.style.display = "flex"
+        ansImageDataUrl = ""
+        ansImageUrl = ""
+    }
+
+    quesImageBox.onclick = () => {
+        quesImage.click()
+    }
+
+    ansImageBox.onclick = () => {
+        ansImage.click()
+    }
+
+    quesImage.onchange = (e) => {
+        const file = e.target.files[0];
+        reader.readAsDataURL(file)
+        reader.addEventListener("load", () => {
+            // convert image file to base64 string
+            quesImageDataUrl = reader.result;
+        }, false);
+        quesImageUrl = URL.createObjectURL(file)
+        quesImageBoxContainer.style.display = "none"
+        QuestionImageEditContainer.style.display = "flex"   
+    }
+
+    ansImage.onchange = (e) => {
+        const file = e.target.files[0];
+        reader.readAsDataURL(file)
+        reader.addEventListener("load", () => {
+            // convert image file to base64 string
+            ansImageDataUrl = reader.result;
+        }, false);
+        ansImageUrl = URL.createObjectURL(file)
+        ansImageBoxContainer.style.display = "none"
+        AnswerImageEditContainer.style.display = "flex"
+    }
+
+    function deleteInputField(e) {
+        let child = e.target.parentElement.parentElement
+        let parent = child.parentElement
+        parent.removeChild(child)
+        lastparentChild = parent.children[parent.children.length-1].children[1]
+        if ((lastparentChild.id != "AddInputField")) {
+            lastparentChild.outerHTML = `
+            <button id="AddInputField" onclick="addInputField(event)" style="font-size: 1.5rem;">+</button>
+            `
+        }
+    }
+
+    var count = 0
+
+    function addInputField(e) {
+        var firstParent = e.target.parentElement.parentElement;
+        var secondParent = e.target.parentElement;
+        var currentLenght = firstParent.children.length
+        var id = e.target.id;
+        var documentElement = document.getElementById(id);
+        var DeleteButton = document.createElement("button");
+        DeleteButton.id = `delete${count}`
+        DeleteButton.style.fontSize = "1.1rem"
+        DeleteButton.innerHTML = `<i class="fa fa-trash-o" onclick="deleteInputField(event)"></i>`
+        secondParent.removeChild(documentElement)
+        secondParent.appendChild(DeleteButton)
+
+        var placementDiv = document.createElement('div');
+        placementDiv.className = "answerFieldWrapper";
+        placementDiv.style.display = "flex"
+        var parentinnerHTML = `<input type="text" placeholder="Enter answer">`
+        if (currentLenght == 22) {
+            parentinnerHTML+= `
+            <button id="delete${count}"  style="font-size: 1.1rem;">
+                <i class="fa fa-trash-o" onclick="deleteInputField(event)"></i>
+            </button>
+            `
+        } else {
+            parentinnerHTML += `
+            <button id="AddInputField" onclick="addInputField(event)" style="font-size: 1.5rem;">+</button>
+            `
+        }
+        placementDiv.innerHTML = parentinnerHTML
+        firstParent.appendChild(placementDiv)
+        count+=1
+    }
+</script>

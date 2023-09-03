@@ -1,0 +1,49 @@
+<script>
+    const checkBox = document.getElementsByClassName("topicCheck");
+    const topicsContainer = document.getElementsByClassName("topics");
+    const proceedButton = document.getElementById("proceedButton");
+    const FullTopicDisplayContainer = document.getElementById("TopicContainer").children
+    var topicsSelected = false
+    //Redirect to flashcards
+    // function ()
+
+    function ProceedToCards() {
+        var topicsParam = "";
+        for (i of FullTopicDisplayContainer) {
+            if (i.dataset.checked === "true") {
+                topicsParam = topicsParam + i.dataset.topic
+            }
+        }
+        window.location = `${window.location}/${topicsParam}`
+    }
+
+    function TopicSelectionCheck() {
+        for (i of FullTopicDisplayContainer) {
+            if (i.dataset.checked === "true") {
+                proceedButton.style.background = "#80C0FF"
+                proceedButton.style.cursor = "pointer"
+                proceedButton.addEventListener("click", ProceedToCards)
+                return true
+            }
+        }
+        proceedButton.style.background = "#D7D7D7"
+        proceedButton.style.cursor = "no-drop"
+        proceedButton.removeEventListener("click", ProceedToCards)
+        return false
+    }
+
+    //Add checkbox function
+    for (i of checkBox) {
+        i.onclick = (e) => {
+            var parentElement = e.target.parentElement
+            if (e.target.checked) {
+                parentElement.style.background = "#9FE9B4"
+                parentElement.dataset.checked = "true"
+            } else {
+                parentElement.style.background = "#80C0FF"
+                parentElement.dataset.checked = "false"  
+            }
+            TopicSelectionCheck()
+        }
+    }
+</script>

@@ -1,0 +1,86 @@
+<script>
+    const PostButton = document.getElementById("postButtonContainer");
+    const subject = window.location.pathname.slice(1, -6);
+    var AnswerArray = [];
+    var Question = "";
+    var topic = "";
+    var Values = [];
+
+    // function chunkDataUrl(dataURL, prompt) {
+    //     var imageValues = [];
+    //     if (dataURL.length > 0) {
+    //             if (dataURL.length > (50000*4)) {
+    //                 alert(`${prompt} image file exceeds max file size"`)
+    //                 console.log(dataURL.length)
+    //                 return false
+    //             } else {
+    //                 var i = 0
+    //                 while (true) {
+    //                     if ((i+50000) > dataURL.length) {
+    //                         imageValues.push(dataURL.slice(i))
+    //                         break;
+    //                     } else {
+    //                         imageValues.push(dataURL.slice(i, i+50000))
+    //                         i += 50000
+    //                     }
+    //                 }
+    //             }
+    //     } else {
+    //         imageValues.push(...["", "", "", ""])
+    //     }
+    //     return imageValues
+    // }
+
+    function PostNewCard() {
+        const AnswerField = document.getElementById("AnswerField").children;
+        topic = document.getElementById("topicSelectionBox").value
+        Question = document.getElementById("questionBox").value
+            for (let i=1; i<AnswerField.length; i++) {
+                var answer = AnswerField[i].children[0].value
+                if (answer != "") {
+                    AnswerArray.push(answer)
+                }
+            }
+            if (topic === "") {
+                alert("Please select a relevant topic")
+                AnswerArray = []
+                return
+            } else if (Question === "" && quesImageDataUrl === "") {
+                alert("Please input a question")
+                AnswerArray = []
+                return
+            } else if (AnswerArray.length === 0 && ansImageDataUrl === "") {
+                alert("Please input an answer")
+                return
+            }
+            values = [ topic , Question, ""]
+            // Code to chunk question Image to four
+            // if (!chunkDataUrl(quesImageDataUrl, "Question")) {
+            //     AnswerArray = []
+            //     values = []
+            //     return
+            // }
+            // values.push(...chunkDataUrl(quesImageDataUrl, "Question"))
+            // console.log(AnswerArray)
+            AnswerArray.forEach((item) => {
+                values.push(item)
+            })
+            console.log(values)
+            // if (!chunkDataUrl(ansImageDataUrl, "Answer")) {
+            //     AnswerArray = []
+            //     values = []
+            //     return
+            // }
+            // values.push(...chunkDataUrl(ansImageDataUrl, "Answer"))
+            // console.log(values)
+            fetch( `/newFlashcard/${subject}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            }).then( () => {
+                location.reload()
+            } ).catch( err => {throw err} )
+    }
+</script>

@@ -1,0 +1,22 @@
+<script>
+    function cardsRedirect() {
+        location.pathname = location.pathname.replace("/cards", "")
+    }
+
+    const showAnswerButton = document.getElementsByClassName("ShowAnswer");
+    for (element of showAnswerButton) {
+        element.onclick = (e) => {
+            e.target.style.display = "none"
+            e.target.parentElement.children[2].style.display = "flex"
+            e.target.parentElement.children[3].style.display = "inline-block"
+        }
+    }
+    const HideAnswersButton = document.getElementsByClassName("HideAnswers");
+    for (element of HideAnswersButton) {
+        element.onclick = (e) => {
+            e.target.style.display = "none"
+            e.target.parentElement.children[2].style.display = "none"
+            e.target.parentElement.children[4].style.display = "inline-block"
+        }
+    }
+</script>

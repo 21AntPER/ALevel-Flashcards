@@ -1,0 +1,102 @@
+<script>
+    const postButton = document.getElementById("postButtonContainer");
+    const modifyButton = document.getElementById("modifyButtonContainer");
+    var cardModifyingIndex;
+    var cardDeletionIndex;
+    var ansLenght;
+
+    function indexOfElement(event) {
+        const wrapperChildren = event.target.parentElement.parentElement.parentElement.children;
+        const cardWrapper = event.target.parentElement.parentElement;
+        for (i in wrapperChildren) {
+            if (wrapperChildren[i] === cardWrapper) {
+                return [parseInt(i)+1, wrapperChildren[i].children[2].children.length]
+            }
+        }
+    }
+
+    function modifyCard(e) {
+        [cardModifyingIndex, ansLenght] = indexOfElement(e)
+        const card = e.target.parentElement.parentElement.children;
+        console.log(card);
+        var topic = (card[0].dataset.topic.trim());
+        console.log(topic)
+        var question = (card[2].textContent.trim());
+        console.log(question)
+        var answer = []
+        for (i of card[3].children) {
+            answer.push(i.textContent.trim())
+        }
+        console.log(answer)
+        const ForumContainer = document.getElementById("ForumContainer");
+        const topicSelectionBox = document.getElementById("topicSelectionBox")
+        const QuesBox = document.getElementById("questionBox");
+        const AnsField = document.getElementById("AnswerField").children;
+
+        ForumContainer.style.display = "inline-block";
+        topicSelectionBox.value = topic
+        QuesBox.value = question;
+        for (let i=1; i<=answer.length; i++) {
+            AnsField[i].children[0].value = answer[i-1]
+            AnsField[i].children[1].click()
+        }
+
+        postButton.style.display = "none"
+        modifyButton.style.display= "inline-block"
+    }
+
+    function SaveChanges() {
+        const AnswerField = document.getElementById("AnswerField");
+        var topic = document.getElementById("topicSelectionBox").value;
+        var Question = document.getElementById("questionBox").value;
+        var answer = [];
+        for (let i=1; i<AnswerField.children.length; i++) {
+            var answer = AnswerField.children[i].children[0].value
+            if (answer != "") {
+                AnswerArray.push(answer)
+            }
+        }
+        values = [topic , Question , ""]
+        AnswerArray.forEach((item) => {
+            values.push(item)
+        })
+        if (AnswerArray.length < ansLenght) {
+            ansLenght = ansLenght-AnswerArray.length
+            for (let i=1; i<=ansLenght;i++) {
+                values.push("")
+            }
+        }
+        const data = {
+            values,
+            range: `${subject}!${cardModifyingIndex}:${cardModifyingIndex}`,
+            index: cardModifyingIndex
+        }
+        console.log("data posted!")
+        fetch( `/modifyFlashcard/${subject}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then( () => {
+            location.reload()
+        } ).catch( err => {throw err} )
+    }
+
+    function deleteCard(e) {
+        cardDeletionIndex = indexOfElement(e)[0]
+        data = {
+            index: cardDeletionIndex,
+            subject
+        }
+        fetch( `/delFlashcard/${subject}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then( () => {
+            location.reload()
+        } ).catch( err => {throw err} )
+    }
+</script>
