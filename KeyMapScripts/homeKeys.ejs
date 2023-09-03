@@ -1,0 +1,31 @@
+<script>
+    var answerDisplay = false;
+    var childIndex = 0;
+    const children = document.getElementById("AnswerContainer").children
+    document.addEventListener("keyup", (e) => {
+        const ShowAns = document.getElementById("ShowAns")
+        const Skip = document.getElementById("Skip")
+        console.log(e.key)
+        if (e.keyCode === 13)  {    // Enter keycode
+            if (answerDisplay === false) {
+                ShowAns.click()
+                answerDisplay = true
+            } else {
+                children[childIndex].children[1].children[0].click()
+                childIndex += 1
+            }
+        }
+        if (e.keyCode === 16) {
+            if (answerDisplay === false) {
+                Skip.click()
+            } else {
+                children[childIndex].children[1].children[1].click()
+                childIndex += 1
+            }
+        }
+        if (childIndex === children.length-4) {
+            childIndex = 0
+            answerDisplay = false
+        }
+    })
+</script>
