@@ -1,0 +1,34 @@
+<div id="SubjectsContainer">
+    <span class="backButton" id="listBackButton">&lArr;</span>
+    <ul id="listOfSubjects">
+            <li>
+                <a href="/Physics/Topic" id="physicsText">
+                    Physics
+                </a>
+            </li>
+            <li>
+                <a href="/Maths/Topic" id="mathText">
+                    Mathematics
+                </a>
+            </li>
+            <li>
+                <a href="/CompSci/Topic" id="compsciText" style="line-height: 2rem;">
+                    Computer Science
+                </a>
+            </li>
+    </ul>
+</div>
+
+<script>
+    const button = document.getElementById("SubMenu");
+    const listContainer = document.getElementById("SubjectsContainer");
+    const backButton1 = document.getElementById("listBackButton");
+
+    button.onclick = () => {
+        listContainer.style.display = "inline-block";
+    }
+
+    backButton1.onclick = () => {
+        listContainer.style.display = "none";
+    }
+</script>

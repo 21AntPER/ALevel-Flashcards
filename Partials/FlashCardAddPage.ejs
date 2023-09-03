@@ -1,0 +1,87 @@
+<div id="ForumContainer">
+    <span class="backButton" id="forumBackButton" style="z-index: +1;width: 100%;margin: 0 1rem;font-size: 3.5rem;cursor: default;">
+        <span onclick="backTOCards()" style="cursor: pointer;">&lArr;</span>
+    </span>
+    <div id="forum">
+            <fieldset class="QuestionAndAnswer" id="QuestionsField" style="margin-bottom: 1rem;">
+                <legend>Topic</legend>
+                <select id="topicSelectionBox">
+                    <option value="">Select Topic</option>
+                    <% for (i of topics) { %>
+                        <option value="<%= i %>"><%= i %></option>
+                    <% } %>
+                </select>
+            </fieldset>
+            <fieldset class="QuestionAndAnswer" id="QuestionsField">
+                <legend>Question</legend>
+                <input type="text" placeholder="Enter question" id="questionBox">
+            </fieldset>
+            <span id="FullQuestionImageTextContainer">
+                <span id="QuestionImageTextContainer">
+                    <span id="QuestionImageText">Add image for question</span>
+                    <input type="file" id="quesImageFileInput" style="display: none;">
+                </span>
+                <div id="QuestionImageEditContainer">
+                    <div class="qImageButtons" id="ViewImageButton" onclick="ViewQuestionImage()">
+                        <div class="qImageButtonsText">View Image</div>
+                    </div>
+                    <div class="qImageButtons" id="UpdateImageButton" onclick="UpdateQuestionImage()">
+                        <div class="qImageButtonsText">Update Image</div>
+                    </div>
+                    <div class="qImageButtons" id="ClearImageButton" onclick="ClearQuestionImage()">
+                        <div class="qImageButtonsText">Clear Image</div>
+                    </div>
+                </div>
+            </span>
+            <!-- <span id="FullQuestionImageEditContainer">
+            </span> -->
+            <fieldset class="QuestionAndAnswer" id="AnswerField">
+                <legend>
+                    Answer
+                </legend>
+                <div class="answerFieldWrapper">
+                    <input type="text" placeholder="Enter answer" style="padding: 0;">
+                    <button id="AddInputField" onclick="addInputField(event)" style="font-size: 1.5rem;padding: 0;">+</button>
+                </div>
+            </fieldset>
+            <span id="FullAnswerImageTextContainer">
+                <span id="AnswerImageTextContainer">
+                    <span id="AnswerImageText">Add image for answer</span>
+                    <input type="file" id="ansImageFileInput" style="display: none;">
+                </span>
+                <div id="AnswerImageEditContainer">
+                    <div class="aImageButtons" id="ViewAnswerImageButton" onclick="ViewAnswerImage()">
+                        <div class="aImageButtonsText">View Image</div>
+                    </div>
+                    <div class="aImageButtons" id="UpdateAnswerImageButton" onclick="UpdateAnswerImage()">
+                        <div class="aImageButtonsText">Update Image</div>
+                    </div>
+                    <div class="aImageButtons" id="ClearAnswerImageButton" onclick="ClearAnswerImage()">
+                        <div class="aImageButtonsText">Clear Image</div>
+                    </div>
+                </div>
+            </span>
+            <div class="QuestionAndAnswer" id="postButtonContainer" onclick="PostNewCard()">
+                <button>POST</button>
+            </div>
+            <div class="QuestionAndAnswer" id="modifyButtonContainer" onclick="SaveChanges()" style="display: none;">
+                <button>SAVE</button>
+            </div>
+        </div>
+</div>
+
+<script>
+    const ForumContainer = document.getElementById("ForumContainer");
+    const Container = ForumContainer.innerHTML
+
+    function ToAddCardDetails() {
+        ForumContainer.style.display = "inline-block";
+        
+    }
+
+    function backTOCards() {
+        ForumContainer.style.display = "none";
+        ForumContainer.innerHTML = Container
+        console.log(ForumContainer.children[1])
+    }
+</script>
